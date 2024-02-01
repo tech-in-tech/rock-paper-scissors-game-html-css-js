@@ -1,6 +1,8 @@
 let userScore = 0;
 let compScore = 0;
-
+let msgPara = document.querySelector("#msg");
+let userScorepara = document.querySelector("#user-score");
+let compScorepara = document.querySelector("#comp-score");
 // selecting choice box;
 
 const choices = document.querySelectorAll(".choice");
@@ -13,20 +15,28 @@ const getCompChoice = () => {
 }
 
 const drowGame = ()=>{
-  console.log("!! Drow Game !!");
+  console.log("!! Game Drow !!");
+  msgPara.innerText = "Game was Drow. Play again.";
 }
-const showWinner = (userWin)=>{
+const showWinner = (userWin,userChoice,compChoice)=>{
   if(userWin){
-    console.log("!! You Win !!");
+    userScore++;
+    userScorepara.innerText = userScore;
+    console.log("You Win");
+    msgPara.innerText = (`You win! Your ${userChoice} beats ${compChoice}`);
   }
   else{
-    console.log("!! You Loss !!");
+    compScore++;
+    compScorepara.innerText = compScore;
+    console.log("You Lose");
+    msgPara.innerText = "You Lose";
+    msgPara.innerText = (`You Lose! comp ${compChoice} beats your ${userChoice}`);
   }
 }
 const playGame = (userChoice)=>{
-  console.log("user choice is",userChoice)
+  console.log("user choice is = ",userChoice)
   let compChoice = getCompChoice();
-  console.log("comp choice is",compChoice);
+  console.log("comp choice is = ",compChoice);
   if(userChoice===compChoice){
     drowGame();
   }
@@ -41,9 +51,7 @@ const playGame = (userChoice)=>{
     else{
       userWin = compChoice === "rock" ? false : true ;
     }
-
-    showWinner(userWin);
-
+    showWinner(userWin,userChoice,compChoice);
   }
 }
 
